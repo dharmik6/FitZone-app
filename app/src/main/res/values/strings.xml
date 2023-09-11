@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">FitZone</string>
+    // login page
+    <string name="sign_in">Sign in</string>
+    <string name="welcome_back_discreiption">"Your fitness journey continues with FitZone."</string>
+    <string name="welcom_back">Welcome back,</string>
+    <string name="forget_password">Forget password?</string>
+    <string name="new_account">Create new account</string>
+    <string name="google">Sign in with Google</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="btn_next">btn_next_page</string>
+
+    // registation page
+    <string name="sign_up">Sign up</string>
+    <string name="welcome">Welcome,</string>
+    <string name="name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="tnc">I Agree to All Terms and Conditions.</string>
+    <string name="welcome_discrition">Let’s Start your fitness journey with FitZone.</string>
+
+    //gender page
+    <string name="gender">What is your Gender?</string>
+    <string name="your_self">About Yourself</string>
+    <string name="continue_">Continue</string>
+
+    // height page
+    <string name="height">What`s your Height?</string>
+
+    //age page
+    <string name="age">How old are you?</string>
+
+    // weight page
+    <string name="weight">What`s your Weight?</string>
+
+    //gole page
+
+    <string name="Endurance">Endurance</string>
+    <string name="max_Strength">Max Strength</string>
+    <string name="Get_toned">Get toned</string>
+
+</resources>

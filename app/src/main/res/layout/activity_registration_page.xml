@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_blue"
+    tools:context=".registration_page">
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_next_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/btn_next"
+            android:src="@drawable/swipe_arrow" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rock"
+            android:gravity="center"
+            android:text="@string/sign_up"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:paddingTop="10dp"/>
+
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="40dp"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.266"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rock"
+                android:text="@string/welcome"
+                android:textColor="@color/black"
+                android:textSize="33sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/recursive_regular"
+                android:text="@string/welcome_discrition"
+                android:textColor="@color/text_color"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txt_name"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="35dp"
+                android:autofillHints=""
+                android:background="@drawable/textbox1"
+                android:drawableStart="@drawable/round_person_24"
+                android:drawablePadding="15dp"
+                android:hint="@string/name"
+                android:inputType="text"
+                android:paddingHorizontal="25dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text_color" />
+
+            <EditText
+                android:id="@+id/txt_phone"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="25dp"
+                android:autofillHints=""
+                android:background="@drawable/textbox1"
+                android:drawableStart="@drawable/baseline_phone_24"
+                android:drawablePadding="15dp"
+                android:hint="@string/phone_number"
+                android:inputType="number"
+                android:paddingHorizontal="25dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text_color" />
+
+            <EditText
+                android:id="@+id/txt_email"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="25dp"
+                android:autofillHints=""
+                android:background="@drawable/textbox1"
+                android:drawableStart="@drawable/baseline_email_24"
+                android:drawablePadding="15dp"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:paddingHorizontal="25dp"
+                android:textColorHint="@color/text_color"
+                android:textColor="@color/black"
+                />
+
+            <EditText
+                android:id="@+id/txt_password"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="25dp"
+                android:autofillHints=""
+                android:background="@drawable/textbox1"
+                android:drawableStart="@drawable/baseline_key_24"
+                android:drawablePadding="15dp"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:paddingHorizontal="25dp"
+                android:textColorHint="@color/text_color"
+                android:textColor="@color/black"
+                />
+
+
+            <CheckBox
+                android:id="@+id/tnc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="15dp"
+                android:buttonTint="@color/moderate_cyan"
+                android:fontFamily="@font/recursive_regular"
+                android:minHeight="48dp"
+                android:paddingLeft="7dp"
+                android:text="@string/tnc"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+
+            <Button
+                android:id="@+id/sign_in"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/button1"
+                android:elevation="10dp"
+                android:fontFamily="@font/recursive_regular"
+                android:onClick="onClickSign_up"
+                android:text="@string/sign_up"
+                android:textAllCaps="false"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:transformPivotX="3dp"
+                android:transformPivotY="5dp"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+
+            <Button
+                android:id="@+id/btn_google"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/button2"
+                android:drawableStart="@drawable/google"
+                android:elevation="1dp"
+                android:fontFamily="@font/recursive_regular"
+                android:paddingHorizontal="20dp"
+                android:text="@string/google"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:transformPivotX="3dp"
+                android:transformPivotY="5dp"
+
+
+                tools:ignore="DuplicateSpeakableTextCheck" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
