@@ -17,7 +17,7 @@ public class height_page extends AppCompatActivity {
 
     ImageView back_Page ;
     NumberPicker height_num;
-    String height;
+    Integer height;
     Button next_page;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,25 +27,31 @@ public class height_page extends AppCompatActivity {
         height_num = findViewById(R.id.height);
         next_page = findViewById((R.id.btn_continue));
 
-        next_page.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(height_page.this ,"Your Height is "+height, Toast.LENGTH_SHORT);
-                Intent weight = new Intent(height_page.this,weight_page.class);
-                startActivity(weight);
-            }
-        });
-
-
+        height_num.setValue(150);
 
         height_num.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                height = Integer.toString(newVal);
+                if(height==null)
+                {
+                    height = 150 ;
+                }
+
+                height = newVal;
             }
+
         });
 
 
+
+        next_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(height_page.this, "Height is "+height, Toast.LENGTH_SHORT).show();
+                Intent weight = new Intent(height_page.this,weight_page.class);
+                startActivity(weight);
+            }
+        });
 
 
         back_Page = findViewById(R.id.btn_next_page);

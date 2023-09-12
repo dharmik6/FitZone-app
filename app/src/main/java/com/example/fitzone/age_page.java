@@ -21,7 +21,7 @@ public class age_page extends AppCompatActivity {
     ImageView backButton;
     NumberPicker age_num ;
     Button next_page ;
-    String age ;
+    int age ;
 
 
     @Override
@@ -33,6 +33,7 @@ public class age_page extends AppCompatActivity {
         age_num = findViewById(R.id.age_num);
         next_page = findViewById(R.id.btn_continue);
 
+        age_num.setValue(18);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +46,8 @@ public class age_page extends AppCompatActivity {
         age_num.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                 age = Integer.toString(newVal);
+
+                 age = newVal;
 
             }
         });
@@ -56,7 +58,6 @@ public class age_page extends AppCompatActivity {
                 Toast.makeText(age_page.this,"Your Age is "+age, Toast.LENGTH_SHORT).show();
                 Intent height = new Intent(age_page.this, height_page.class);
                 startActivity(height);
-
 
             }
         });

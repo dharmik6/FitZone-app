@@ -104,7 +104,6 @@
                 app:np_textColor="@color/text_color"
                 app:np_textSize="30dp"
                 app:np_typeface="@font/rock"
-                app:np_value="150"
 
                 tools:ignore="SpeakableTextPresentCheck" />
 
