@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".goal_page"
+    android:background="@color/dark_blue"
+    >
+
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/btn_next_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/swipe_arrow"
+            android:contentDescription="@string/btn_next"
+            android:onClick="backPage"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/btn_next_page"
+            android:layout_marginStart="1dp"
+            android:fontFamily="@font/rock"
+            android:text="@string/your_self"
+            android:textAlignment="center"
+            android:paddingLeft="20dp"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:paddingTop="10dp"/>
+
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/drawer"
+        >
+
+        <LinearLayout
+
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="40dp"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rock"
+                android:text="@string/weight"
+                android:textColor="@color/black"
+                android:textSize="33sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/recursive_regular"
+                android:text="@string/welcome_back_discreiption"
+                android:textColor="@color/text_color"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+          <LinearLayout
+              android:layout_marginTop="30dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:gravity="center"
+              android:layout_marginVertical="30dp">
+
+              <ImageButton
+                  android:id="@+id/muscle"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginVertical="10dp"
+                  android:background="?android:attr/selectableItemBackground"
+                  android:src="@drawable/muscle"
+                  tools:ignore="SpeakableTextPresentCheck" />
+
+              <ImageButton
+                  android:id="@+id/endurance"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginVertical="10dp"
+                  android:background="?android:attr/selectableItemBackground"
+                  android:src="@drawable/endurance"
+
+                  tools:ignore="SpeakableTextPresentCheck" />
+
+              <ImageButton
+                  android:id="@+id/strength"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginVertical="10dp"
+                  android:background="?android:attr/selectableItemBackground"
+                  android:src="@drawable/sthergth"
+
+                  tools:ignore="SpeakableTextPresentCheck" />
+
+              <ImageButton
+                  android:id="@+id/toned"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginVertical="10dp"
+                  android:background="?android:attr/selectableItemBackground"
+                  android:src="@drawable/toned"
+
+                  tools:ignore="SpeakableTextPresentCheck" />
+          </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_continue"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/button1"
+                android:elevation="10dp"
+                android:fontFamily="@font/recursive_regular"
+                android:text="@string/continue_"
+                android:textAllCaps="false"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:transformPivotX="3dp"
+                android:transformPivotY="5dp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

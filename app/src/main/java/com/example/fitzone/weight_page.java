@@ -48,9 +48,8 @@ public class weight_page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(weight_page.this,"Your weight is "+weight, Toast.LENGTH_SHORT).show();
-                //Intent height = new Intent(weight_page.this, .class);
-               // startActivity(height);
-
+                Intent height = new Intent(weight_page.this,goal_page.class);
+               startActivity(height);
 
             }
         });
