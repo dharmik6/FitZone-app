@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/rock"
+            android:fontFamily="@font/patuaone_regular"
             android:gravity="center"
             android:text="@string/sign_up"
             android:textAlignment="center"
@@ -64,20 +64,22 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/rock"
+                android:fontFamily="@font/patuaone_regular"
                 android:text="@string/welcome"
                 android:textColor="@color/black"
                 android:textSize="33sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/recursive_regular"
+                android:fontFamily="@font/robotoslab_regular"
                 android:text="@string/welcome_discrition"
                 android:textColor="@color/text_color"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:paddingLeft="5dp"/>
 
             <EditText
                 android:id="@+id/txt_name"
@@ -148,13 +150,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
                 android:buttonTint="@color/moderate_cyan"
-                android:fontFamily="@font/recursive_regular"
+                android:fontFamily="@font/robotoslab_regular"
                 android:minHeight="48dp"
                 android:paddingLeft="7dp"
                 android:text="@string/tnc"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
-
 
             <Button
                 android:id="@+id/sign_in"
@@ -162,7 +163,7 @@
                 android:layout_height="50dp"
                 android:background="@drawable/button1"
                 android:elevation="10dp"
-                android:fontFamily="@font/recursive_regular"
+                android:fontFamily="@font/robotoslab_regular"
                 android:onClick="onClickSign_up"
                 android:text="@string/sign_up"
                 android:textAllCaps="false"
@@ -181,7 +182,7 @@
                 android:background="@drawable/button2"
                 android:drawableStart="@drawable/google"
                 android:elevation="1dp"
-                android:fontFamily="@font/recursive_regular"
+                android:fontFamily="@font/robotoslab_regular"
                 android:paddingHorizontal="20dp"
                 android:text="@string/google"
                 android:textAllCaps="false"

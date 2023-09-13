@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@id/btn_next_page"
             android:layout_marginStart="1dp"
-            android:fontFamily="@font/rock"
+            android:fontFamily="@font/patuaone_regular"
             android:text="@string/your_self"
             android:textAlignment="center"
             android:paddingLeft="20dp"
@@ -68,20 +68,22 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/rock"
+                android:fontFamily="@font/patuaone_regular"
                 android:text="@string/gender"
                 android:textColor="@color/black"
                 android:textSize="33sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+            android:gravity="center"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/recursive_regular"
+                android:fontFamily="@font/robotoslab_regular"
                 android:text="@string/welcome_back_discreiption"
                 android:textColor="@color/text_color"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:gravity="center"/>
 
             <ImageView
                 android:id="@+id/btn_male"
@@ -92,7 +94,8 @@
                 android:paddingBottom="10dp"
                 android:src="@drawable/male"
                 tools:ignore="SpeakableTextPresentCheck"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                />
 
             <ImageView
                 android:id="@+id/btn_female"
@@ -110,7 +113,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/button1"
                 android:elevation="10dp"
-                android:fontFamily="@font/recursive_regular"
+                android:fontFamily="@font/robotoslab_regular"
                 android:text="@string/continue_"
                 android:textAllCaps="false"
                 android:textSize="26sp"

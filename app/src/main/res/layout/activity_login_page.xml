@@ -25,12 +25,12 @@
         android:contentDescription="@string/btn_next" />
 
     <TextView
-        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignStart="@id/btn_next_page"
-        android:layout_marginStart="1dp"
-        android:fontFamily="@font/rock"
+        android:layout_marginStart="-1dp"
+        android:fontFamily="@font/patuaone_regular"
+        android:paddingTop="10dp"
         android:text="@string/sign_in"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -62,7 +62,7 @@
       <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:fontFamily="@font/rock"
+          android:fontFamily="@font/patuaone_regular"
           android:text="@string/welcom_back"
           android:textColor="@color/black"
           android:textSize="33sp"
@@ -71,11 +71,12 @@
       <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:fontFamily="@font/recursive_regular"
+          android:fontFamily="@font/robotoslab_regular"
           android:text="@string/welcome_back_discreiption"
           android:textColor="@color/text_color"
           android:textSize="12sp"
-          android:textStyle="bold" />
+          android:textStyle="bold"
+          android:paddingLeft="5dp"/>
 
       <EditText
           android:id="@+id/txt_email"
@@ -118,7 +119,7 @@
           android:layout_marginTop="35dp"
           android:background="@drawable/button1"
           android:elevation="10dp"
-          android:fontFamily="@font/recursive_regular"
+          android:fontFamily="@font/robotoslab_regular"
           android:text="@string/sign_in"
           android:textAllCaps="false"
           android:textSize="26sp"
@@ -138,7 +139,8 @@
           android:text="@string/forget_password"
           android:textAlignment="center"
           android:textColor="@color/text_color"
-          android:textSize="17sp" />
+          android:textSize="17sp"
+          android:fontFamily="@font/robotoslab_regular"/>
 
 
     </LinearLayout>
@@ -177,7 +179,7 @@
           android:layout_marginTop="35dp"
           android:background="@drawable/button2"
           android:elevation="10dp"
-          android:fontFamily="@font/recursive_regular"
+          android:fontFamily="@font/robotoslab_regular"
           android:text="@string/new_account"
           android:textAllCaps="false"
           android:textSize="26sp"
@@ -196,7 +198,7 @@
           android:background="@drawable/button2"
           android:elevation="1dp"
           android:textColor="@color/black"
-          android:fontFamily="@font/recursive_regular"
+          android:fontFamily="@font/robotoslab_regular"
           android:text="@string/google"
           android:textAllCaps="false"
           android:textSize="22sp"

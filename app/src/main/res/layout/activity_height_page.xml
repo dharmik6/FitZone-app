@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@id/btn_next_page"
             android:layout_marginStart="1dp"
-            android:fontFamily="@font/rock"
+            android:fontFamily="@font/patuaone_regular"
             android:text="@string/your_self"
             android:textAlignment="center"
             android:paddingLeft="20dp"
@@ -68,20 +68,22 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/rock"
+                android:fontFamily="@font/patuaone_regular"
                 android:text="@string/height"
                 android:textColor="@color/black"
                 android:textSize="33sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:gravity="center"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/recursive_regular"
+                android:fontFamily="@font/robotoslab_regular"
                 android:text="@string/welcome_back_discreiption"
                 android:textColor="@color/text_color"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:gravity="center"/>
 
             <com.shawnlin.numberpicker.NumberPicker
                 android:id="@+id/height"
@@ -98,12 +100,12 @@
                 app:np_itemSpacing="-20dp"
                 app:np_max="250"
                 app:np_min="50"
-                app:np_selectedTextColor="@color/dark_blue"
+                app:np_selectedTextColor="@color/black"
                 app:np_selectedTextSize="50dp"
-                app:np_selectedTypeface="@font/rock"
+                app:np_selectedTypeface="@font/patuaone_regular"
                 app:np_textColor="@color/text_color"
                 app:np_textSize="30dp"
-                app:np_typeface="@font/rock"
+                app:np_typeface="@font/patuaone_regular"
 
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -115,7 +117,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/button1"
                 android:elevation="10dp"
-                android:fontFamily="@font/recursive_regular"
+                android:fontFamily="@font/robotoslab_regular"
                 android:text="@string/continue_"
                 android:textAllCaps="false"
                 android:textSize="26sp"
