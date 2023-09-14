@@ -106,6 +106,8 @@
                 android:drawableStart="@drawable/baseline_phone_24"
                 android:drawablePadding="15dp"
                 android:hint="@string/phone_number"
+                android:maxLines="10"
+                android:minLines="10"
                 android:inputType="number"
                 android:paddingHorizontal="25dp"
                 android:textColor="@color/black"

@@ -12,13 +12,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class registration_page extends AppCompatActivity {
     EditText name, phone_number, email, password;
     Button sign_up, google;
     CheckBox tnc;
     ImageView backpress;
 
-
+    DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReferenceFromUrl("");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

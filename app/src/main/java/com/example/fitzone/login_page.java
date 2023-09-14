@@ -12,12 +12,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class login_page extends AppCompatActivity {
 
     EditText email, password ;
     Button new_account, sign_in ;
-
     ImageView back_page;
+
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,6 @@ public class login_page extends AppCompatActivity {
         new_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent registration_page = new Intent(login_page.this, com.example.fitzone.registration_page.class);
                 startActivity(registration_page);
             }
@@ -46,7 +49,6 @@ public class login_page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
-
             }
         });
 
