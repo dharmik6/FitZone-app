@@ -28,16 +28,18 @@ public class height_page extends AppCompatActivity {
         next_page = findViewById((R.id.btn_continue));
 
         height_num.setValue(150);
-
+        height=150;
         height_num.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                if(height==null)
+                if(height_num==null)
                 {
                     height = 150 ;
                 }
+                else{
+                    height = newVal;
+                }
 
-                height = newVal;
             }
 
         });

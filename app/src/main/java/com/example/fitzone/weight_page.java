@@ -15,7 +15,7 @@ public class weight_page extends AppCompatActivity {
     ImageView backButton;
     NumberPicker weight_num ;
     Button next_page ;
-    String weight ;
+    Integer weight ;
 
 
 
@@ -34,11 +34,19 @@ public class weight_page extends AppCompatActivity {
             }
 
         });
+        weight=60 ;
 
         weight_num.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                weight = Integer.toString(newVal);
+                if(weight_num==null)
+                {
+                    weight = 150 ;
+                }
+                else{
+                    weight = newVal;
+                }
+
 
 
             }

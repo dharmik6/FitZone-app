@@ -42,12 +42,18 @@ public class age_page extends AppCompatActivity {
 
         });
 
-
+        age= 18 ;
         age_num.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                if(age_num==null)
+                {
+                    age = 150 ;
+                }
+                else{
+                    age = newVal;
+                }
 
-                 age = newVal;
 
             }
         });
