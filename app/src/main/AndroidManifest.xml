@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -14,14 +13,32 @@
         android:theme="@style/Theme.FitZone"
         tools:targetApi="31">
         <activity
+            android:name=".admin_home_page"
+            android:exported="false" />
+        <activity
+            android:name=".registration_page"
+            android:exported="true" />
+        <activity
+            android:name=".actionbar"
+            android:exported="false" />
+        <activity
+            android:name=".intro_page"
+            android:exported="false" />
+        <activity
+            android:name=".admin_login"
+            android:exported="false" />
+        <activity
             android:name=".splash_screen"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".goal_page"
+            android:exported="false" />
         <activity
             android:name=".weight_page"
             android:exported="false" />
@@ -30,19 +47,13 @@
             android:exported="false" />
         <activity
             android:name=".height_page"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".gender_page"
             android:exported="true" />
         <activity
-            android:name=".registration_page"
-            android:exported="true" >
-
-        </activity>
-        <activity
             android:name=".login_page"
             android:exported="false" />
-
     </application>
 
 </manifest>

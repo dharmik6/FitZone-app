@@ -12,21 +12,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 public class registration_page extends AppCompatActivity {
+
     EditText name, phone_number, email, password;
     Button sign_up, google;
     CheckBox tnc;
     ImageView backpress;
 
-    DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReferenceFromUrl("");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_page);
-        // connect with edittext
+
+
+
+// connect with edittext
         name = findViewById(R.id.txt_name);
         phone_number = findViewById(R.id.txt_phone);
         email = findViewById(R.id.txt_email);
@@ -48,7 +48,7 @@ public class registration_page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    onBackPressed();
+                onBackPressed();
 
             }
         });
@@ -73,7 +73,7 @@ public class registration_page extends AppCompatActivity {
                 {
                     email.setError("Email is compulsary");
                 }
-                 if (TextUtils.isEmpty(password.getText().toString()))
+                if (TextUtils.isEmpty(password.getText().toString()))
                 {
                     password.setError("Password is compulsary");
                 }
@@ -90,11 +90,5 @@ public class registration_page extends AppCompatActivity {
                 //********************************
             }
         });
-
     }
-
-
-
 }
-
-

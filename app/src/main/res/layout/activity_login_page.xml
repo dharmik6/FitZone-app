@@ -173,21 +173,22 @@
         android:layout_marginHorizontal="30dp">
 
       <Button
-          android:id="@+id/btn_new_account"
+          android:id="@+id/btn_registration"
+          android:layout_marginTop="25dp"
           android:layout_width="match_parent"
           android:layout_height="50dp"
-          android:layout_marginTop="35dp"
           android:background="@drawable/button2"
           android:elevation="10dp"
+          android:textColor="@color/black"
           android:fontFamily="@font/robotoslab_regular"
           android:text="@string/new_account"
           android:textAllCaps="false"
-          android:textSize="26sp"
+          android:textSize="23sp"
           android:textStyle="bold"
           android:transformPivotX="3dp"
           android:transformPivotY="5dp"
-          android:textColor="@color/black"
-
+          android:drawableStart="@drawable/google"
+          android:paddingHorizontal="20dp"
           tools:ignore="DuplicateSpeakableTextCheck" />
 
       <Button
@@ -196,19 +197,17 @@
           android:layout_width="match_parent"
           android:layout_height="50dp"
           android:background="@drawable/button2"
-          android:elevation="1dp"
+          android:elevation="10dp"
           android:textColor="@color/black"
           android:fontFamily="@font/robotoslab_regular"
           android:text="@string/google"
           android:textAllCaps="false"
-          android:textSize="22sp"
+          android:textSize="23sp"
           android:textStyle="bold"
           android:transformPivotX="3dp"
           android:transformPivotY="5dp"
           android:drawableStart="@drawable/google"
           android:paddingHorizontal="20dp"
-
-
           tools:ignore="DuplicateSpeakableTextCheck" />
     </LinearLayout>
 

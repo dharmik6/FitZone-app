@@ -39,4 +39,25 @@
     <string name="max_Strength">Max Strength</string>
     <string name="Get_toned">Get toned</string>
 
+    // first page
+    <string name="filed">Please Select your Filed.</string>
+    <string name="who">Who are you ?</string>
+    <string name="admin">Admin</string>
+    <string name="user">Gymmer</string>
+    <string name="trainer">Trainer</string>
+
+    //admin login
+
+    <string name="welcom_admin">Welcome back Admin,</string>
+    <string name="admin_welcome_back_discreiption">Ready to work now.</string>
+    <string name="login">Login</string>
+
+    <string name="navigation_drawer_open">drawer open</string>
+    <string name="navigation_drawer_close">drawer close</string>
+
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+
 </resources>
+
+

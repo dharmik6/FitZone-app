@@ -32,17 +32,18 @@ public class login_page extends AppCompatActivity {
         sign_in = findViewById(R.id.sign_in);
         email = findViewById(R.id.txt_email);
         password = findViewById(R.id.txt_password);
-        new_account = findViewById(R.id.btn_new_account);
-
-        //----------------- new account ------------------
+        new_account = findViewById(R.id.btn_registration);
 
         new_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registration_page = new Intent(login_page.this, com.example.fitzone.registration_page.class);
-                startActivity(registration_page);
+                Intent registration = new Intent(login_page.this, com.example.fitzone.registration_page.class);
+                startActivity(registration);
             }
         });
+
+
+
 
       //------------------ back Button ------------------
         back_page.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +80,9 @@ public class login_page extends AppCompatActivity {
         });
 
 
+
     }
+
 
 
 
