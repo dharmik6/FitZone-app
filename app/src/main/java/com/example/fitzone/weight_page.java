@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.shawnlin.numberpicker.NumberPicker;
 
 public class weight_page extends AppCompatActivity {
@@ -46,19 +50,28 @@ public class weight_page extends AppCompatActivity {
                 else{
                     weight = newVal;
                 }
-
-
-
             }
         });
-
         next_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(weight_page.this,"Your weight is "+weight, Toast.LENGTH_SHORT).show();
-                Intent height = new Intent(weight_page.this,goal_page.class);
-               startActivity(height);
-
+                // Initialize Firebase Database reference
+                DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
+                // Assuming you have a "users" node where you want to store the age information
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    String userId = user.getUid();
+                    DatabaseReference userRef = databaseRef.child("users").child(userId);
+                    // Store the selected age under the user's data
+                    userRef.child("weight").setValue(weight);
+                    // Navigate to the next activity
+                    Intent height = new Intent(weight_page.this, goal_page.class);
+                    startActivity(height);
+                    finish();
+                } else {
+                    // Handle the case where the user is not authenticated
+                    Toast.makeText(weight_page.this, "User not authenticated", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

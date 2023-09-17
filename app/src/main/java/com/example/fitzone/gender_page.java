@@ -15,6 +15,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class gender_page extends AppCompatActivity {
     ImageView male,female;
     boolean isSelected,isready;
@@ -84,8 +89,6 @@ public class gender_page extends AppCompatActivity {
             }
         });
 
-
-
         next_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,15 +99,28 @@ public class gender_page extends AppCompatActivity {
                 }
                 else
                 {
-                    Intent nextPage =new Intent(gender_page.this, com.example.fitzone.age_page.class);
-                    startActivity(nextPage);
-                    Toast.makeText(gender_page.this, gender+" selected", Toast.LENGTH_SHORT).show();
+                    // Initialize Firebase Database reference
+                    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
+
+                    // Assuming you have a "users" node where you want to store the gender information
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null) {
+                        String userId = user.getUid();
+                        DatabaseReference userRef = databaseRef.child("users").child(userId);
+
+                        // Store the selected gender under the user's data
+                        userRef.child("gender").setValue(gender);
+
+                        // Navigate to the next activity
+                        Intent nextPage = new Intent(gender_page.this, com.example.fitzone.age_page.class);
+                        startActivity(nextPage);
+                        Toast.makeText(gender_page.this, gender + " selected", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Handle the case where the user is not authenticated
+                        Toast.makeText(gender_page.this, "User not authenticated", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
-
-
     }
-
-
 }

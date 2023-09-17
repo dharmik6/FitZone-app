@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.shawnlin.numberpicker.NumberPicker;
 
 public class height_page extends AppCompatActivity {
@@ -44,14 +48,34 @@ public class height_page extends AppCompatActivity {
 
         });
 
-
-
         next_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(height_page.this, "Height is "+height, Toast.LENGTH_SHORT).show();
-                Intent weight = new Intent(height_page.this,weight_page.class);
-                startActivity(weight);
+                next_page.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Initialize Firebase Database reference
+                        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
+
+                        // Assuming you have a "users" node where you want to store the age information
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if (user != null) {
+                            String userId = user.getUid();
+                            DatabaseReference userRef = databaseRef.child("users").child(userId);
+
+                            // Store the selected age under the user's data
+                            userRef.child("height").setValue(height);
+
+                            // Navigate to the next activity
+                            Intent height = new Intent(height_page.this, weight_page.class);
+                            startActivity(height);
+                            finish();
+                        } else {
+                            // Handle the case where the user is not authenticated
+                            Toast.makeText(height_page.this, "User not authenticated", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
 
