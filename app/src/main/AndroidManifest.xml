@@ -13,13 +13,7 @@
         android:theme="@style/Theme.FitZone"
         tools:targetApi="31">
         <activity
-            android:name=".admin_home_page"
-            android:exported="false" />
-        <activity
             android:name=".registration_page"
-            android:exported="true" />
-        <activity
-            android:name=".actionbar"
             android:exported="false" />
         <activity
             android:name=".intro_page"
@@ -50,7 +44,7 @@
             android:exported="false" />
         <activity
             android:name=".gender_page"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".login_page"
             android:exported="false" />

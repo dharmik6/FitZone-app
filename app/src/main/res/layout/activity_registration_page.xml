@@ -107,9 +107,8 @@
                 android:drawableStart="@drawable/baseline_phone_24"
                 android:drawablePadding="15dp"
                 android:hint="@string/phone_number"
-                android:maxLines="10"
-                android:minLines="10"
-                android:inputType="number"
+                android:maxLength="10"
+                android:inputType="phone"
                 android:paddingHorizontal="25dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/text_color" />
@@ -194,8 +193,6 @@
                 android:textStyle="bold"
                 android:transformPivotX="3dp"
                 android:transformPivotY="5dp"
-
-
                 tools:ignore="DuplicateSpeakableTextCheck" />
         </LinearLayout>
 

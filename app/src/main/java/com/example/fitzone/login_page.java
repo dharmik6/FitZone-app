@@ -1,5 +1,7 @@
 package com.example.fitzone;
 
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,43 +11,46 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseApp;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class login_page extends AppCompatActivity {
 
-    EditText email, password ;
-    Button new_account, sign_in ;
+    EditText email, password;
+    Button new_account, sign_in, goole;
     ImageView back_page;
 
-    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
+        goole = findViewById(R.id.btn_goole);
         back_page = findViewById(R.id.btn_next_page);
         sign_in = findViewById(R.id.sign_in);
         email = findViewById(R.id.txt_email);
         password = findViewById(R.id.txt_password);
         new_account = findViewById(R.id.btn_registration);
 
+
+        //----------------- new account ------------------
+
         new_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registration = new Intent(login_page.this, com.example.fitzone.registration_page.class);
-                startActivity(registration);
+                Intent registration_page = new Intent(login_page.this, com.example.fitzone.registration_page.class);
+                startActivity(registration_page);
             }
         });
 
-
-
-
-      //------------------ back Button ------------------
+        //------------------ back Button ------------------
         back_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,40 +59,38 @@ public class login_page extends AppCompatActivity {
         });
 
 
-      //------------sign in button----------------
+        //------------sign in button----------------
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //*******************************
                 // start validation
-                if  (TextUtils.isEmpty(email.getText().toString()) )
-                {
+                if (TextUtils.isEmpty(email.getText().toString())) {
                     email.setError("Email is compulsary");
                 }
-                if (TextUtils.isEmpty(password.getText().toString()))
-                {
+                if (TextUtils.isEmpty(password.getText().toString())) {
                     password.setError("Password is compulsary");
-                }
-                else {
-                    // inten in age page page
-                    Intent login_page = new Intent(login_page.this, com.example.fitzone.gender_page.class);
-                    startActivity(login_page);
-                    //***********************************
+                } else {
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign-in successful, navigate to the next page
+                                        Intent genderPageIntent = new Intent(login_page.this, com.example.fitzone.gender_page.class);
+                                        startActivity(genderPageIntent);
+                                    } else {
+                                        // Sign-in failed, display an error message
+                                        Toast.makeText(login_page.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            });
                     //end validation
                 }
             }
         });
-
-
-
-    }
-
-
-
-
-    public  void onClickForget_Password()
-    {
-
     }
 }

@@ -1,26 +1,37 @@
 {
   "project_info": {
-    "project_number": "788256892771",
-    "project_id": "fitzone-8e142",
-    "storage_bucket": "fitzone-8e142.appspot.com"
+    "project_number": "359207159789",
+    "firebase_url": "https://fitzone-bb2bc-default-rtdb.firebaseio.com",
+    "project_id": "fitzone-bb2bc",
+    "storage_bucket": "fitzone-bb2bc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:788256892771:android:7321c1f014e9dc18c19556",
+        "mobilesdk_app_id": "1:359207159789:android:4b690b89f2a928dff089e4",
         "android_client_info": {
           "package_name": "com.example.fitzone"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "359207159789-7qvvntak3ntfdcck1sa8j97ppkfp0ilk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDE14g-pdDw9gdH6Ea5Stqr60TeosvqSlQ"
+          "current_key": "AIzaSyCI5TyT6E0F7E9Z9fE9wFeSLCL3Lrw-JH0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359207159789-7qvvntak3ntfdcck1sa8j97ppkfp0ilk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
