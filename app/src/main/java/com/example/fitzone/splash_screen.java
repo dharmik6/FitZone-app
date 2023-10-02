@@ -3,6 +3,7 @@ package com.example.fitzone;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
@@ -33,14 +34,25 @@ public class splash_screen extends AppCompatActivity {
 
 
         new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+            @Override
+            public void run() {
+                SharedPreferences pref = getSharedPreferences("login", MODE_PRIVATE);
+                Boolean check = pref.getBoolean("flag", false);
 
-                        Intent intent = new Intent(splash_screen.this, login_page.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }, 2000);
+                Intent inext;
+                if (check) {
+                    // User is logged in, navigate to home_page
+                    inext = new Intent(splash_screen.this, home_page.class);
+                } else {
+                    // User is not logged in, navigate to login_page
+                    inext = new Intent(splash_screen.this, login_page.class);
+                }
+
+                startActivity(inext);
+                finish(); // Close the splash screen activity after navigating
+            }
+        }, 2000);
+
 
 
 

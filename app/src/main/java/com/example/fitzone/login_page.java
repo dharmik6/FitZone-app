@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -79,6 +80,11 @@ public class login_page extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
+                                        SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = pref.edit();
+
+                                     editor.putBoolean("flag" ,true);
+                                     editor.apply();
                                         // Sign-in successful, navigate to the next page
                                         Intent genderPageIntent = new Intent(login_page.this, com.example.fitzone.gender_page.class);
                                         startActivity(genderPageIntent);

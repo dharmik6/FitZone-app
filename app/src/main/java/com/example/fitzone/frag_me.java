@@ -1,6 +1,8 @@
 package com.example.fitzone;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -39,10 +41,18 @@ public class frag_me extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ilogout = new Intent(getContext(), login_page.class);
-                startActivity(ilogout);
+                SharedPreferences pref = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putBoolean("flag", false);
+                editor.apply();
+
+                // After logging out, navigate to the LoginActivity
+                Intent intent = new Intent(getContext(), login_page.class);
+                startActivity(intent);
+                getActivity().finish(); // Close the current activity
             }
         });
+
 
         return view;
     }
