@@ -23,8 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class login_page extends AppCompatActivity {
 
     EditText email, password;
-    Button new_account, sign_in, goole;
-    ImageView back_page;
+    Button new_account, sign_in;
+    ImageView change;
 
 
     @Override
@@ -32,14 +32,21 @@ public class login_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
-        goole = findViewById(R.id.btn_goole);
-        back_page = findViewById(R.id.btn_next_page);
+
+        change = findViewById(R.id.change);
         sign_in = findViewById(R.id.sign_in);
         email = findViewById(R.id.txt_email);
         password = findViewById(R.id.txt_password);
         new_account = findViewById(R.id.btn_registration);
 
 
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itrainer = new Intent(login_page.this, trainer_login.class);
+                startActivity(itrainer);
+            }
+        });
         //----------------- new account ------------------
 
         new_account.setOnClickListener(new View.OnClickListener() {
@@ -50,13 +57,7 @@ public class login_page extends AppCompatActivity {
             }
         });
 
-        //------------------ back Button ------------------
-        back_page.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+
 
 
         //------------sign in button----------------

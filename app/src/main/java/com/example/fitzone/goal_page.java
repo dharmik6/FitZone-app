@@ -2,6 +2,7 @@ package com.example.fitzone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ public class goal_page extends AppCompatActivity {
     ImageView backButton ;
     ImageButton muscle,endurance,strength,toned ;
     boolean isSelected ;
+    Button btnNext ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +27,16 @@ public class goal_page extends AppCompatActivity {
         strength = findViewById(R.id.strength);
         toned = findViewById(R.id.toned);
         backButton = findViewById(R.id.btn_next_page);
+        btnNext = findViewById(R.id.btn_continue);
 
 
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ihome = new Intent(goal_page.this,home_page.class);
+                startActivity(ihome);
+            }
+        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

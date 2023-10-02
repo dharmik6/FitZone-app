@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin_login"
+    tools:context=".trainer_login"
     android:background="@color/dark_blue">
 
     <RelativeLayout
@@ -17,20 +18,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/btn_next_page"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/swipe_arrow"
+            android:id="@+id/change"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/baseline_compare_arrows_24"
             android:contentDescription="@string/btn_next" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@id/btn_next_page"
+            android:layout_alignStart="@id/change"
             android:layout_marginStart="-1dp"
             android:fontFamily="@font/patuaone_regular"
             android:paddingTop="10dp"
-            android:text="@string/login"
+            android:text="@string/sign_in"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30sp" />
@@ -39,32 +40,29 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="500dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/drawer">
+        android:background="@drawable/drawer"
+        >
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="35dp"
-            android:layout_marginVertical="50dp"
-            android:layout_marginBottom="1dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="70dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-         >
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:fontFamily="@font/patuaone_regular"
-                android:text="@string/welcom_admin"
+                android:text="@string/trainer_login"
                 android:textColor="@color/black"
                 android:textSize="33sp"
                 android:textStyle="bold" />
@@ -72,51 +70,52 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
                 android:fontFamily="@font/robotoslab_regular"
-                android:paddingLeft="5dp"
-                android:text="@string/admin_welcome_back_discreiption"
+                android:text="@string/welcome_back_discreiption"
                 android:textColor="@color/text_color"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingLeft="5dp"/>
 
             <EditText
-                android:id="@+id/txt_admin_id"
+                android:id="@+id/txt_trainer_email"
+                android:layout_marginTop="45dp"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginTop="60dp"
-                android:autofillHints=""
                 android:background="@drawable/textbox1"
                 android:drawableStart="@drawable/baseline_email_24"
                 android:drawablePadding="15dp"
                 android:hint="@string/email"
-                android:inputType="textEmailAddress"
                 android:paddingHorizontal="25dp"
-                android:textColor="@color/black"
                 android:textColorHint="@color/text_color"
-                tools:ignore="VisualLintTextFieldSize" />
+                android:inputType="textEmailAddress"
+                android:autofillHints=""
+                tools:ignore="VisualLintTextFieldSize"
+                android:textColor="@color/black"
+                />
 
             <EditText
-                android:id="@+id/txt_admin_password"
+                android:id="@+id/txt_trainer_password"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginTop="30dp"
-                android:autofillHints=""
+                android:layout_marginTop="25dp"
                 android:background="@drawable/textbox1"
                 android:drawableStart="@drawable/baseline_key_24"
                 android:drawablePadding="15dp"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:paddingHorizontal="25dp"
-                android:textColor="@color/black"
                 android:textColorHint="@color/text_color"
-                tools:ignore="VisualLintTextFieldSize" />
+                android:autofillHints=""
+                tools:ignore="VisualLintTextFieldSize"
+                android:textColor="@color/black"
+                />
 
             <Button
-                android:id="@+id/admin_login"
+                android:id="@+id/btn_trainer_sign_in"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="45dp"
                 android:background="@drawable/button1"
                 android:elevation="10dp"
                 android:fontFamily="@font/robotoslab_regular"
@@ -126,17 +125,30 @@
                 android:textStyle="bold"
                 android:transformPivotX="3dp"
                 android:transformPivotY="5dp"
-                android:layout_marginBottom="40dp"
-
+                android:textColor="@color/white"
                 tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/btn_forgetpass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:minHeight="48dp"
+                android:onClick="onClickForget_Password"
+                android:text="@string/forget_password"
+                android:textAlignment="center"
+                android:textColor="@color/text_color"
+                android:textSize="17sp"
+                android:fontFamily="@font/robotoslab_regular"/>
 
 
         </LinearLayout>
 
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

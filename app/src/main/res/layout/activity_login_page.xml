@@ -18,16 +18,16 @@
       app:layout_constraintTop_toTopOf="parent">
 
     <ImageView
-        android:id="@+id/btn_next_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/swipe_arrow"
+        android:id="@+id/change"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/baseline_compare_arrows_24"
         android:contentDescription="@string/btn_next" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/btn_next_page"
+        android:layout_alignStart="@id/change"
         android:layout_marginStart="-1dp"
         android:fontFamily="@font/patuaone_regular"
         android:paddingTop="10dp"
@@ -126,7 +126,7 @@
           android:textStyle="bold"
           android:transformPivotX="3dp"
           android:transformPivotY="5dp"
-
+          android:textColor="@color/white"
           tools:ignore="DuplicateSpeakableTextCheck" />
 
       <TextView
@@ -187,28 +187,9 @@
           android:textStyle="bold"
           android:transformPivotX="3dp"
           android:transformPivotY="5dp"
-          android:drawableStart="@drawable/google"
           android:paddingHorizontal="20dp"
           tools:ignore="DuplicateSpeakableTextCheck" />
 
-      <Button
-          android:id="@+id/btn_goole"
-          android:layout_marginTop="25dp"
-          android:layout_width="match_parent"
-          android:layout_height="50dp"
-          android:background="@drawable/button2"
-          android:elevation="10dp"
-          android:textColor="@color/black"
-          android:fontFamily="@font/robotoslab_regular"
-          android:text="@string/google"
-          android:textAllCaps="false"
-          android:textSize="23sp"
-          android:textStyle="bold"
-          android:transformPivotX="3dp"
-          android:transformPivotY="5dp"
-          android:drawableStart="@drawable/google"
-          android:paddingHorizontal="20dp"
-          tools:ignore="DuplicateSpeakableTextCheck" />
     </LinearLayout>
 
 

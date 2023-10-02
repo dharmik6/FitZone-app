@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="3dp"
+    android:background="@drawable/list_shap"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="7dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/list_shap"
+        >
+
+        <ImageView
+            android:id="@+id/workoutImageView"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:cropToPadding="true"
+            android:src="@color/white"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="30dp"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/workoutNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="person name"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/robotoslab_regular"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/focusAreaTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/patuaone_regular"
+                android:layout_marginStart="30dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

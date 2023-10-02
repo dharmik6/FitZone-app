@@ -9,5 +9,7 @@
     <color name="base_color">#EDEBEB</color>
     <color name="text_color">#5C5C5C</color>
     <color name="textbox_color">#CFCFCF</color>
+    <color name="base_color2">#E0E0E0</color>
+    <color name="redcolor">#FF0000</color>
 
 </resources>

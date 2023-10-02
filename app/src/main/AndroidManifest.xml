@@ -6,20 +6,23 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo1"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo1"
         android:supportsRtl="true"
         android:theme="@style/Theme.FitZone"
         tools:targetApi="31">
         <activity
-            android:name=".registration_page"
+            android:name=".trainer_home_page"
             android:exported="false" />
         <activity
-            android:name=".intro_page"
+            android:name=".trainer_login"
             android:exported="false" />
         <activity
-            android:name=".admin_login"
+            android:name=".setting_page"
+            android:exported="false" />
+        <activity
+            android:name=".profile_page"
             android:exported="false" />
         <activity
             android:name=".splash_screen"
@@ -30,6 +33,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".registration_page"
+            android:exported="false" />
+        <activity
+            android:name=".home_page"
+            android:exported="true" />
         <activity
             android:name=".goal_page"
             android:exported="false" />
@@ -48,6 +57,37 @@
         <activity
             android:name=".login_page"
             android:exported="false" />
+        <activity
+            android:name=".UserList"
+            android:exported="false" />
+        <activity
+            android:name=".UserData"
+            android:exported="false" />
+        <activity
+            android:name=".WorkoutList"
+            android:exported="false" />
+        <activity
+            android:name=".WorkoutAdd"
+            android:exported="false" />
+        <activity
+            android:name=".WorkoutData"
+            android:exported="false" />
+        <activity
+            android:name=".WorkoutEdit"
+            android:exported="false" />
+        <activity
+            android:name=".DietAdd"
+            android:exported="false" />
+        <activity
+            android:name=".DietData"
+            android:exported="false" />
+        <activity
+            android:name=".DietEdit"
+            android:exported="false" />
+        <activity
+            android:name=".DietList"
+            android:exported="false" />
+
     </application>
 
 </manifest>
