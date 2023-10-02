@@ -120,7 +120,7 @@
                 android:textStyle="bold"
                 android:transformPivotX="3dp"
                 android:transformPivotY="5dp"
-
+                android:textColor="@color/white"
                 tools:ignore="DuplicateSpeakableTextCheck" />
 
         </LinearLayout>

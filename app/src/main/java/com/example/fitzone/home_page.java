@@ -33,7 +33,8 @@ public class home_page extends AppCompatActivity {
                 if (itemId == R.id.nav_workout) {
                     loadFragment(new frag_workout());
                     return true;
-                } else if (itemId == R.id.nav_diet) {
+                }
+                else if (itemId == R.id.nav_diet) {
                     loadFragment(new frag_diet());
                     return true;
                 } else if (itemId == R.id.nav_me) {
