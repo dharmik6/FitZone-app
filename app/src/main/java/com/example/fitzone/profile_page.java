@@ -62,7 +62,13 @@ public class profile_page extends AppCompatActivity {
                     userWeightTextView.setText(String.valueOf(weight));
 
                     // Load user profile image into ImageView using Glide
-                    Glide.with(profile_page.this).load(imageUrl).into(profileImageView);
+
+                    Glide.with(profile_page.this)
+                            .load(imageUrl)
+                            .placeholder(R.drawable.baseline_image_24) // Placeholder image while loading
+                            .error(R.drawable.baseline_image_24) // Image to show if loading fails
+                            .into(profileImageView);
+
                 }
 
                 // Dismiss the progress dialog after loading data

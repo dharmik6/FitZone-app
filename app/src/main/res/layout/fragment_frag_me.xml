@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".frag_me">
+    tools:context=".frag_me"
+    android:background="@color/base_color2">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@color/base_color"
-            android:elevation="15dp">
+            android:elevation="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -31,10 +32,10 @@
         </LinearLayout>
 
        <LinearLayout
-
+           android:elevation="5dp"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:background="@drawable/drawer2"
+           android:background="@drawable/dr"
            android:orientation="vertical"
            android:paddingVertical="20dp"
            android:layout_marginHorizontal="20dp"
