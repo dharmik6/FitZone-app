@@ -114,6 +114,7 @@ public class gender_page extends AppCompatActivity {
                         // Navigate to the next activity
                         Intent nextPage = new Intent(gender_page.this, com.example.fitzone.age_page.class);
                         startActivity(nextPage);
+                        finish();
                         Toast.makeText(gender_page.this, gender + " selected", Toast.LENGTH_SHORT).show();
                     } else {
                         // Handle the case where the user is not authenticated

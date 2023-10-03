@@ -97,6 +97,7 @@ public class registration_page extends AppCompatActivity {
                                         Toast.makeText(registration_page.this, "Registration successful.", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(registration_page.this, gender_page.class);
                                         startActivity(intent);
+                                        finish();
                                     } else {
                                         Toast.makeText(registration_page.this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
                                     }

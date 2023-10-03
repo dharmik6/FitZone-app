@@ -88,6 +88,7 @@ public class login_page extends AppCompatActivity {
                                         // Sign-in successful, navigate to the next page
                                         Intent genderPageIntent = new Intent(login_page.this, com.example.fitzone.gender_page.class);
                                         startActivity(genderPageIntent);
+                                        finish();
                                     } else {
                                         // Sign-in failed, display an error message
                                         Toast.makeText(login_page.this, "Authentication failed", Toast.LENGTH_SHORT).show();
