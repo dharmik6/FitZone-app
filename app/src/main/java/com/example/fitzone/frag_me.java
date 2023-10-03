@@ -26,7 +26,7 @@ public class frag_me extends Fragment {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ihome = new Intent(getContext(), home_page.class);
+                Intent ihome = new Intent(getContext(), profile_page.class);
                 startActivity(ihome);
             }
         });
