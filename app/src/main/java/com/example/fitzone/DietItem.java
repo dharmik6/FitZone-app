@@ -2,18 +2,23 @@ package com.example.fitzone;
 
 public class DietItem {
     private String dietName;
-    private int dietImageResourceId;
+    private String dietDescription;
+    private String imageUrl;
 
-    public DietItem(String dietName, int dietImageResourceId) {
+    public DietItem(String dietName, String dietDescription, String imageUrl) {
         this.dietName = dietName;
-        this.dietImageResourceId = dietImageResourceId;
+        this.dietDescription = dietDescription;
+        this.imageUrl = imageUrl;
     }
-
+    public DietItem(String dietName, String imageUrl) {
+        this.dietName = dietName;
+        this.imageUrl = imageUrl;
+    }
     public String getDietName() {
         return dietName;
     }
 
-    public int getDietImageResourceId() {
-        return dietImageResourceId;
+    public String getImageUrl() {
+        return imageUrl;
     }
 }

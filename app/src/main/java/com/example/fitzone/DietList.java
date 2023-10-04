@@ -17,6 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,7 @@ public class DietList extends AppCompatActivity {
     private List<DietItem> dietItems = new ArrayList<>();
     DrawerLayout drawerLayout ;
     NavigationView navigationView;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,20 +47,10 @@ public class DietList extends AppCompatActivity {
         add_diet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent idietadd = new Intent(DietList.this,WorkoutAdd.class);
+                Intent idietadd = new Intent(DietList.this,DietAdd.class);
                 startActivity(idietadd);
             }
         });
-        // Sample diet items, you can add more items as needed
-        dietItems.add(new DietItem("Diet 1", R.drawable.round_menu_24));
-        dietItems.add(new DietItem("Diet 2", R.drawable.round_menu_24));
-        dietItems.add(new DietItem("Diet 3", R.drawable.round_menu_24));
-
-        recyclerView = findViewById(R.id.diet_recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-        adapter = new DietAdapter(getApplicationContext(), dietItems);
-        recyclerView.setAdapter(adapter);
 
         //***************************************************
         //navigation bar
@@ -90,6 +86,42 @@ public class DietList extends AppCompatActivity {
                 closeDrawer(drawerLayout);
 
                 return true;
+            }
+        });
+        recyclerView = findViewById(R.id.diet_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new DietAdapter(this, dietItems);
+        recyclerView.setAdapter(adapter);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("diets");
+
+        setDatabaseListener();
+    }
+
+    private void setDatabaseListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dietItems.clear();
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String dietName = dataSnapshot.child("dietName").getValue(String.class);
+                    String imageUrl = dataSnapshot.child("imageUrl").getValue(String.class); // Change to "imageUrl"
+
+                    if (dietName != null && imageUrl != null) {
+                        DietItem dietItem = new DietItem(dietName, imageUrl);
+                        dietItems.add(dietItem);
+                    }
+                }
+                adapter.notifyDataSetChanged(); // Notify the adapter that the data has changed
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle database error
             }
         });
     }
