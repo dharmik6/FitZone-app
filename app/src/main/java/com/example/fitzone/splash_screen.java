@@ -38,7 +38,16 @@ public class splash_screen extends AppCompatActivity {
             public void run() {
                 SharedPreferences pref = getSharedPreferences("login", MODE_PRIVATE);
                 Boolean check = pref.getBoolean("flag", false);
-
+                SharedPreferences pref2 = getSharedPreferences("login2", MODE_PRIVATE);
+                Boolean check2 = pref2.getBoolean("flag2", false);
+                Intent inext2;
+                if (check2) {
+                    // User is logged in, navigate to home_page
+                    inext2 = new Intent(splash_screen.this, trainer_home_page.class);
+                } else {
+                    // User is not logged in, navigate to login_page
+                    inext2 = new Intent(splash_screen.this, trainer_login.class);
+                }
                 Intent inext;
                 if (check) {
                     // User is logged in, navigate to home_page

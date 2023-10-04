@@ -7,7 +7,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -78,7 +80,19 @@ public class trainer_home_page extends AppCompatActivity {
                     redirectActivity(trainer_home_page.this, WorkoutList.class);
                 } else if (id == R.id.diet) {
                     redirectActivity(trainer_home_page.this, DietList.class);
-                } else {
+                }  else if (id == R.id.logout) {
+                    SharedPreferences pref2 = getSharedPreferences("login2", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref2.edit();
+                    editor.putBoolean("flag2", false);
+                    editor.apply();
+                    redirectActivity(trainer_home_page.this, home_page.class);
+                    finish();
+
+                }
+                else if (id == R.id.profile) {
+                    redirectActivity(trainer_home_page.this, trainer_profile_page.class);
+                }
+                 else {
                     Toast.makeText(trainer_home_page.this, "profile", Toast.LENGTH_SHORT).show();
                 }
 

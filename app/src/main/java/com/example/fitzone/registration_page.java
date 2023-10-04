@@ -43,7 +43,7 @@ public class registration_page extends AppCompatActivity {
 
         // Connect with buttons and checkbox
         sign_up = findViewById(R.id.sign_in);
-        google = findViewById(R.id.btn_google);
+//        google = findViewById(R.id.btn_google);
         tnc = findViewById(R.id.tnc);
 
         // Connect with ImageView for back button
@@ -99,8 +99,8 @@ public class registration_page extends AppCompatActivity {
                                         startActivity(intent);
                                         finish();
                                     } else {
-                                        Toast.makeText(registration_page.this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
-                                    }
+                                        String errorMessage = task.getException().getMessage();
+                                        Toast.makeText(registration_page.this, "Registration failed: " + errorMessage, Toast.LENGTH_SHORT).show();                                    }
                                 }
                             });
                 }
