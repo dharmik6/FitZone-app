@@ -13,6 +13,9 @@
         android:theme="@style/Theme.FitZone"
         tools:targetApi="31">
         <activity
+            android:name=".trainer_profile_page"
+            android:exported="false" />
+        <activity
             android:name=".trainer_home_page"
             android:exported="false" />
         <activity
@@ -38,10 +41,7 @@
             android:exported="false" />
         <activity
             android:name=".home_page"
-            android:exported="true" >
-
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".goal_page"
             android:exported="false" />
@@ -90,7 +90,6 @@
         <activity
             android:name=".DietList"
             android:exported="false" />
-
     </application>
 
 </manifest>

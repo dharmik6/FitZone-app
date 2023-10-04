@@ -1,6 +1,7 @@
 package com.example.fitzone;
 
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,8 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,27 +21,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class profile_page extends AppCompatActivity {
-    Button btn_image ;
+public class trainer_profile_page extends AppCompatActivity {
+    Button btn_trimage ;
 
-    private ImageView profileImageView;
-    private TextView userNameTextView, userAgeTextView, userGenderTextView, userHeightTextView, userWeightTextView;
+    private ImageView tr_profileImageView;
+    private TextView trNameTextView, trAgeTextView, trGenderTextView, trPoneTextView, trWeightTextView;
     private static final int PICK_IMAGE_REQUEST = 1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_page);
+        setContentView(R.layout.activity_trainer_profile_page);
+        tr_profileImageView = findViewById(R.id.tr_profile_img);
+        trNameTextView = findViewById(R.id.trainer_name);
+        trAgeTextView = findViewById(R.id.trainer_age);
+        trGenderTextView = findViewById(R.id.trainer_gender);
+        trPoneTextView = findViewById(R.id.trainer_phone);
 
-        profileImageView = findViewById(R.id.profile_img);
-        userNameTextView = findViewById(R.id.user_name);
-        userAgeTextView = findViewById(R.id.user_age);
-        userGenderTextView = findViewById(R.id.user_gender);
-        userHeightTextView = findViewById(R.id.user_height);
-        userWeightTextView = findViewById(R.id.user_weight);
-        btn_image = findViewById(R.id.btn_Uimage);
+        btn_trimage = findViewById(R.id.btn_trimage);
 
-        btn_image.setOnClickListener(new View.OnClickListener() {
+        btn_trimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent iuser = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -58,8 +56,8 @@ public class profile_page extends AppCompatActivity {
         // Retrieve and set the user's name, email, and profile image from Firebase Realtime Database
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         // Assuming `userId` is the unique identifier for the user
-        String userId = currentUser.getUid();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+        String trainerId = currentUser.getUid();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("trainer").child(trainerId);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -69,24 +67,23 @@ public class profile_page extends AppCompatActivity {
                     String name = dataSnapshot.child("name").getValue(String.class);
                     int age = dataSnapshot.child("age").getValue(Integer.class);
                     String gender = dataSnapshot.child("gender").getValue(String.class);
-                    int height = dataSnapshot.child("height").getValue(Integer.class);
-                    int weight = dataSnapshot.child("weight").getValue(Integer.class);
+                    int phone = dataSnapshot.child("phone").getValue(Integer.class);
                     String imageUrl = dataSnapshot.child("img").getValue(String.class);
 
                     // Set user data to UI elements
-                    userNameTextView.setText(name);
-                    userAgeTextView.setText(String.valueOf(age));
-                    userGenderTextView.setText(gender);
-                    userHeightTextView.setText(String.valueOf(height));
-                    userWeightTextView.setText(String.valueOf(weight));
+                    trNameTextView.setText(name);
+                    trAgeTextView.setText(String.valueOf(age));
+                    trGenderTextView.setText(gender);
+                    trPoneTextView.setText(String.valueOf(phone));
+
 
                     // Load user profile image into ImageView using Glide
 
-                    Glide.with(profile_page.this)
+                    Glide.with(trainer_profile_page.this)
                             .load(imageUrl)
                             .placeholder(R.drawable.baseline_image_24) // Placeholder image while loading
                             .error(R.drawable.baseline_image_24) // Image to show if loading fails
-                            .into(profileImageView);
+                            .into(tr_profileImageView);
 
                 }
 
