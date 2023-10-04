@@ -27,17 +27,17 @@ public class frag_diet extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_frag_diet, container, false);
 
-
-        // Sample diet items, you can add more items as needed
-        dietItems.add(new DietItem("Diet 1", R.drawable.baseline_image_24));
-        dietItems.add(new DietItem("Diet 2", R.drawable.baseline_image_24));
-        dietItems.add(new DietItem("Diet 3", R.drawable.baseline_image_24));
-
-        recyclerView = view.findViewById(R.id.diet_recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        adapter = new DietAdapter(getContext(), dietItems);
-        recyclerView.setAdapter(adapter);
+//
+//        // Sample diet items, you can add more items as needed
+//        dietItems.add(new DietItem("Diet 1", R.drawable.baseline_image_24));
+//        dietItems.add(new DietItem("Diet 2", R.drawable.baseline_image_24));
+//        dietItems.add(new DietItem("Diet 3", R.drawable.baseline_image_24));
+//
+//        recyclerView = view.findViewById(R.id.diet_recyclerView);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//
+//        adapter = new DietAdapter(getContext(), dietItems);
+//        recyclerView.setAdapter(adapter);
 
         return view;
 
