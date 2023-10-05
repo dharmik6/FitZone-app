@@ -1,5 +1,9 @@
 package com.example.fitzone;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -9,11 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -51,7 +52,6 @@ public class DietAdd extends AppCompatActivity {
         add_diet_image = findViewById(R.id.import_diet_image);
         //*************************************
         //import diet image
-
         add_diet_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,49 +64,48 @@ public class DietAdd extends AppCompatActivity {
         add_diet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get the user input from EditText fields
+
+                // Get the values from EditText fields
                 String dietName = diet_name.getText().toString();
                 String dietDescription = description.getText().toString();
 
-                // Check if the user has selected an image
-                if (selectedImageUri != null) {
-                    // Upload the image to Firebase Storage
+                // Check if all fields are filled
+                if (!dietName.isEmpty() && !dietDescription.isEmpty() && selectedImageUri != null) {
+                    // Create a reference for the image file in Firebase Storage
                     StorageReference imageRef = storageReference.child(selectedImageUri.getLastPathSegment());
-                    imageRef.putFile(selectedImageUri)
-                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    // Image upload success, get the download URL
-                                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            // Create a Diet object with name, description, and image URL
-                                            String imageUrl = uri.toString();
-                                            DietItem diet = new DietItem(dietName, dietDescription, imageUrl);
 
-                                            // Push the Diet object to the Firebase Realtime Database
-                                            String dietId = databaseReference.push().getKey();
-                                            databaseReference.child(dietId).setValue(diet)
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if (task.isSuccessful()) {
-                                                                // Diet data added to the database successfully
-                                                                Toast.makeText(DietAdd.this, "Diet Added Successfully", Toast.LENGTH_SHORT).show();
-                                                                startActivity(new Intent(DietAdd.this,DietList.class));
-                                                            } else {
-                                                                // Handle the error
-                                                                Toast.makeText(DietAdd.this, "Failed to add diet", Toast.LENGTH_SHORT).show();
-                                                            }
-                                                        }
-                                                    });
-                                        }
-                                    });
-                                }
-                            });
+                    // Upload the image to Firebase Storage
+                    UploadTask uploadTask = imageRef.putFile(selectedImageUri);
+
+                    // Listen for the completion of the upload task
+                    uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                // Get the download URL for the uploaded image
+                                imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        // Use uri.toString() to get the image URL
+                                        String imageUrl = uri.toString();
+
+                                        // Create a WorkoutItem object
+                                        DietItem dietItem = new DietItem(dietName, dietDescription, imageUrl);
+
+                                        // Push the workout data to the database
+                                        databaseReference.push().setValue(dietItem);
+                                        startActivity(new Intent(DietAdd.this, DietList.class));
+                                        Toast.makeText(DietAdd.this, "Diet added", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                                // Handle the upload failure
+                                Toast.makeText(DietAdd.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 } else {
-                    // Handle the case where the user didn't select an image
-                    Toast.makeText(DietAdd.this, "Please select an image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DietAdd.this, "Please fill in all fields and select an image", Toast.LENGTH_SHORT).show();
                 }
             }
         });
