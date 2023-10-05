@@ -200,7 +200,26 @@
                     android:textColor="@color/dark_blue"
                     android:textSize="25dp" />
             </LinearLayout>
+            <Button
+                android:id="@+id/updt_profile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/button1"
+                android:elevation="10dp"
+                android:fontFamily="@font/robotoslab_regular"
+                android:text="Update Profile"
+                android:textAllCaps="false"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:transformPivotX="3dp"
+                android:transformPivotY="5dp"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="30dp"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
         </LinearLayout>
     </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

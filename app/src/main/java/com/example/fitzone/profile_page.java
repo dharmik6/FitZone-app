@@ -27,6 +27,7 @@ public class profile_page extends AppCompatActivity {
     private ImageView profileImageView;
     private TextView userNameTextView, userAgeTextView, userGenderTextView, userHeightTextView, userWeightTextView;
     private static final int PICK_IMAGE_REQUEST = 1;
+    Button profile ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,15 @@ public class profile_page extends AppCompatActivity {
         userHeightTextView = findViewById(R.id.user_height);
         userWeightTextView = findViewById(R.id.user_weight);
         btn_image = findViewById(R.id.btn_Uimage);
+        profile = findViewById(R.id.updt_profile);
 
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iupdt = new Intent(profile_page.this , gender_page.class);
+                startActivity(iupdt);
+            }
+        });
         btn_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

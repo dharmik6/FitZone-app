@@ -2,24 +2,61 @@ package com.example.fitzone;
 
 public class WorkoutItem {
     private String workoutName;
-    private String focusArea;
-    private int workoutImageResourceId;
-
-    public WorkoutItem(String workoutName, String focusArea, int workoutImageResourceId) {
+    private String workoutFocusArea;
+    private String workoutImageResourceId;
+    private String workoutDescription;
+    public WorkoutItem() {
         this.workoutName = workoutName;
-        this.focusArea = focusArea;
+        this.workoutFocusArea = workoutFocusArea;
         this.workoutImageResourceId = workoutImageResourceId;
+    }
+
+    public WorkoutItem(String workoutName) {
+        this.workoutName=workoutName;
+    }
+
+    public String getWorkoutDescription() {
+        return workoutDescription;
+    }
+
+    public void setWorkoutDescription(String workoutDescription) {
+        this.workoutDescription = workoutDescription;
+    }
+
+    public WorkoutItem(String workoutName, String workoutFocusArea, String workoutDescription, String workoutImageResourceId) {
+        this.workoutName = workoutName;
+        this.workoutFocusArea = workoutFocusArea;
+        this.workoutImageResourceId = workoutImageResourceId;
+        this.workoutDescription=workoutDescription;
     }
 
     public String getWorkoutName() {
         return workoutName;
     }
 
-    public String getFocusArea() {
-        return focusArea;
+    public void setWorkoutName(String workoutName) {
+        this.workoutName = workoutName;
     }
 
-    public int getWorkoutImageResourceId() {
+    public String getWorkoutFocusArea() {
+        return workoutFocusArea;
+    }
+
+    public void setWorkoutFocusArea(String workoutFocusArea) {
+        this.workoutFocusArea = workoutFocusArea;
+    }
+
+    public String getWorkoutImageResourceId() {
         return workoutImageResourceId;
+    }
+
+    public void setWorkoutImageResourceId(String workoutImageResourceId) {
+        this.workoutImageResourceId = workoutImageResourceId;
+    }
+
+    public WorkoutItem(String workoutName, String workoutFocusArea) {
+        this.workoutName=workoutName;
+        this.workoutFocusArea=workoutFocusArea;
+        // Default constructor required for Firebase
     }
 }

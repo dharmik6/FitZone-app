@@ -1,5 +1,11 @@
 package com.example.fitzone;
 
+import static androidx.core.app.ActivityCompat.startActivityForResult;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -11,8 +17,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class WorkoutAdd extends AppCompatActivity {
 
@@ -21,6 +35,8 @@ public class WorkoutAdd extends AppCompatActivity {
     ImageView work_image ;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri selectedImageUri;
+    private StorageReference storageReference;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +50,10 @@ public class WorkoutAdd extends AppCompatActivity {
         work_image = findViewById(R.id.add_work_image);
         add_work_image = findViewById(R.id.btn_add_work_image);
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("workouts");
+        storageReference = FirebaseStorage.getInstance().getReference().child("workout_images");
+
         add_work_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,8 +65,49 @@ public class WorkoutAdd extends AppCompatActivity {
         add_work.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Your code to handle adding a workout
-                Toast.makeText(WorkoutAdd.this, "Workout added", Toast.LENGTH_SHORT).show();
+                // Get the values from EditText fields
+                String workoutName = work_name.getText().toString();
+                String focusArea = focuse_work.getText().toString();
+                String workoutDescription = description.getText().toString();
+
+                // Check if all fields are filled
+                if (!workoutName.isEmpty() && !focusArea.isEmpty() && !workoutDescription.isEmpty() && selectedImageUri != null) {
+                    // Create a reference for the image file in Firebase Storage
+                    StorageReference imageRef = storageReference.child(selectedImageUri.getLastPathSegment());
+
+                    // Upload the image to Firebase Storage
+                    UploadTask uploadTask = imageRef.putFile(selectedImageUri);
+
+                    // Listen for the completion of the upload task
+                    uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                // Get the download URL for the uploaded image
+                                imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        // Use uri.toString() to get the image URL
+                                        String imageUrl = uri.toString();
+
+                                        // Create a WorkoutItem object
+                                        WorkoutItem workoutItem = new WorkoutItem(workoutName, focusArea, workoutDescription, imageUrl);
+
+                                        // Push the workout data to the database
+                                        databaseReference.push().setValue(workoutItem);
+                                        startActivity(new Intent(WorkoutAdd.this, WorkoutList.class));
+                                        Toast.makeText(WorkoutAdd.this, "Workout added", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                                // Handle the upload failure
+                                Toast.makeText(WorkoutAdd.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } else {
+                    Toast.makeText(WorkoutAdd.this, "Please fill in all fields and select an image", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

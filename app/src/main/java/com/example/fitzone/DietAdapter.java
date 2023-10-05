@@ -11,7 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+
 
 import java.util.List;
 
@@ -33,43 +34,37 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
-    @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DietItem currentItem = dietItems.get(position);
-        if (currentItem != null) {
-            String dietName = currentItem.getDietName();
-//            String dirtDescription = currentItem.();
-            String imageUrl = currentItem.getImageUrl();
+        holder.dietNameTextView.setText(currentItem.getDietName());
 
-            // Check if the values are not null before using them
-            if (dietName != null) {
-                holder.dietNameTextView.setText(dietName);
-            } else {
-                holder.dietNameTextView.setText("");
-            }
 
-            // Load the image using Picasso
-            if (imageUrl != null && !imageUrl.isEmpty()) {
-                Picasso.get().load(imageUrl).into(holder.dietImageView);
-            }
+        // Load user image from Firebase using Glide
+        String imageUrl = currentItem.getDietImageResourceId();
+        Glide.with(context)
+                .load(imageUrl)
+                .into(holder.dietImageView);
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = holder.getAdapterPosition();
+                DietItem item = dietItems.get(position);
+                if (position != RecyclerView.NO_POSITION) {
+                    String dietname = item.getDietName();
+                    String dietdesc = item.getDietDescription();
                     Intent intent = new Intent(context, DietData.class);
-                    intent.putExtra("wname", dietName);
-//                    intent.putExtra("wdes", dirtDescription);
-                    // Pass the URL or other identifier for the image, which can be loaded in WorkoutData activity
-                    intent.putExtra("imag", imageUrl);
-                    // Add the FLAG_ACTIVITY_NEW_TASK flag
+                    intent.putExtra("dietname", dietname);
+                    intent.putExtra("dietdesc", dietdesc);
+                    intent.putExtra("dietimage", imageUrl);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
+                } else {
+                    // Handle the case where the position is invalid or the view holder is detached.
+                    // You can log an error or display a message to the user.
                 }
-            });
-        }
-//        DietItem item = dietItems.get(position);
-//        holder.dietNameTextView.setText(item.getDietName());
-//        holder.dietImageView.setImageResource(Integer.parseInt(item.getDietImageResourceId()));
+            }
+        });
     }
 
     @Override
@@ -79,11 +74,13 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView dietNameTextView;
+
         ImageView dietImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             dietNameTextView = itemView.findViewById(R.id.dietNameTextView);
+             // Initialize TextView
             dietImageView = itemView.findViewById(R.id.dietImageView);
         }
     }
