@@ -1,6 +1,7 @@
 package com.example.fitzone;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -31,33 +32,35 @@ public class WorkoutList extends AppCompatActivity {
     private WorkoutAdapter adapter;
     private List<WorkoutItem> workoutItems = new ArrayList<>();
 
-    TextView add_work ;
+    TextView add_work;
     DatabaseReference databaseReference;
-    DrawerLayout drawerLayout ;
+    DrawerLayout drawerLayout;
     NavigationView navigationView;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_list);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading..."); // Set the message for the progress dialog
+        progressDialog.setCancelable(false);
 
+        // Initialize RecyclerView and its adapter
         recyclerView = findViewById(R.id.work_recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new WorkoutAdapter(this, workoutItems);
         recyclerView.setAdapter(adapter);
 
+        // Initialize Firebase database reference
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("diets");
+        databaseReference = database.getReference("workouts");
 
+        // Set up the database listener to fetch workout data
         setDatabaseListener();
 
-
-
-        //***************************************************
-        //navigation bar
+        // Set up navigation drawer and menu items
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigationview);
         ImageView menu = findViewById(R.id.menu);
@@ -66,15 +69,16 @@ public class WorkoutList extends AppCompatActivity {
         add_work.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iworkadd = new Intent(WorkoutList.this,WorkoutAdd.class);
+                // Open the WorkoutAdd activity
+                Intent iworkadd = new Intent(WorkoutList.this, WorkoutAdd.class);
                 startActivity(iworkadd);
             }
         });
 
-
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Open the navigation drawer
                 openDrawer(drawerLayout);
             }
         });
@@ -85,17 +89,19 @@ public class WorkoutList extends AppCompatActivity {
                 int id = item.getItemId();
 
                 if (id == R.id.user) {
+                    // Redirect to UserList activity
                     redirectActivity(WorkoutList.this, UserList.class);
-                }  else if (id == R.id.workout) {
-                    redirectActivity(WorkoutList.this, WorkoutList.class);
-                } else if (id == R.id.diet) {
+                } else if (id == R.id.workout) {
+                    // Already in the WorkoutList activity, do nothing
+                }
+                else if (id == R.id.diet) {
+                    // Redirect to DietList activity
                     redirectActivity(WorkoutList.this, DietList.class);
                 } else {
                     Toast.makeText(WorkoutList.this, "profile", Toast.LENGTH_SHORT).show();
                 }
 
                 closeDrawer(drawerLayout);
-
                 return true;
             }
         });
@@ -113,42 +119,49 @@ public class WorkoutList extends AppCompatActivity {
 
     public static void redirectActivity(Activity activity, Class secondActivity) {
         Intent intent = new Intent(activity, secondActivity);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
         activity.finish();
     }
 
+    @Override
     protected void onPause() {
         super.onPause();
         closeDrawer(drawerLayout);
     }
 
     private void setDatabaseListener() {
+        progressDialog.show();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 workoutItems.clear();
 
+                // Loop through the dataSnapshot and retrieve workout data
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String workName = dataSnapshot.child("workoutName").getValue(String.class);
-                    String imageUrl = dataSnapshot.child("workoutImageResourceId").getValue(String.class); // Change to "imageUrl"
-                    String workdesc = dataSnapshot.child("workoutDescription").getValue(String.class); // Change to "imageUrl"
+                    String focus = dataSnapshot.child( "workoutFocusArea").getValue(String.class);
+                    String imageUrl = dataSnapshot.child("workoutImageResourceId").getValue(String.class);
+                    String workDesc = dataSnapshot.child("workoutDescription").getValue(String.class);
 
-
-                    if (workName != null && imageUrl != null) {
-                        WorkoutItem dietItem = new WorkoutItem(workName, imageUrl);
-                        workoutItems.add(dietItem);
+                    if (workName != null && imageUrl != null && workDesc != null) {
+                        // Create WorkoutItem objects and add them to the workoutItems list
+                        WorkoutItem workoutItem = new WorkoutItem(workName, focus, workDesc,imageUrl);
+                        workoutItems.add(workoutItem);
                     }
                 }
-                adapter.notifyDataSetChanged(); // Notify the adapter that the data has changed
+
+                // Notify the adapter that the data has changed
+                adapter.notifyDataSetChanged();
+                progressDialog.dismiss();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Handle database error
+                Toast.makeText(WorkoutList.this, "Database Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
     }
-
 }
-

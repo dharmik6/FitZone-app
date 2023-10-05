@@ -58,10 +58,10 @@ public class WorkoutEdit extends AppCompatActivity {
 
                 if (selectedImageUri != null) {
                     // Assuming you have a Workout class to store data
-                    WorkoutAdapter workout = new WorkoutAdapter(workName, focusArea, workoutDesc, selectedImageUri.toString());
+//                    WorkoutAdapter workout = new WorkoutAdapter(workName, focusArea, workoutDesc, selectedImageUri);
 
                     // Push the workout data to the database
-                    workoutRef.push().setValue(workout);
+//                    workoutRef.push().setValue(workout);
 
                     Toast.makeText(WorkoutEdit.this, "Record Updated", Toast.LENGTH_SHORT).show();
                 } else {
