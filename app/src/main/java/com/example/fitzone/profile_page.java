@@ -61,14 +61,15 @@ public class profile_page extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Open the image picker
-                Intent iuser = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(iuser, PICK_IMAGE_REQUEST);
+
+                Intent iupdt = new Intent(profile_page.this , gender_page.class);
+                startActivity(iupdt);
             }
         });
         btn_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Open the image picker
                 Intent iuser = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(iuser,PICK_IMAGE_REQUEST);
             }
