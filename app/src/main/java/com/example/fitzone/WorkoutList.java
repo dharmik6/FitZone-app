@@ -17,6 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +32,7 @@ public class WorkoutList extends AppCompatActivity {
     private List<WorkoutItem> workoutItems = new ArrayList<>();
 
     TextView add_work ;
+    DatabaseReference databaseReference;
     DrawerLayout drawerLayout ;
     NavigationView navigationView;
 
@@ -38,9 +44,16 @@ public class WorkoutList extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.work_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-        adapter = new WorkoutAdapter(getApplicationContext(), workoutItems);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new WorkoutAdapter(this, workoutItems);
         recyclerView.setAdapter(adapter);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("diets");
+
+        setDatabaseListener();
+
 
 
         //***************************************************
@@ -108,6 +121,33 @@ public class WorkoutList extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         closeDrawer(drawerLayout);
+    }
+
+    private void setDatabaseListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                workoutItems.clear();
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String workName = dataSnapshot.child("workoutName").getValue(String.class);
+                    String imageUrl = dataSnapshot.child("workoutImageResourceId").getValue(String.class); // Change to "imageUrl"
+                    String workdesc = dataSnapshot.child("workoutDescription").getValue(String.class); // Change to "imageUrl"
+
+
+                    if (workName != null && imageUrl != null) {
+                        WorkoutItem dietItem = new WorkoutItem(workName, imageUrl);
+                        workoutItems.add(dietItem);
+                    }
+                }
+                adapter.notifyDataSetChanged(); // Notify the adapter that the data has changed
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle database error
+            }
+        });
     }
 
 }

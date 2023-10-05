@@ -88,6 +88,7 @@ public class DietList extends AppCompatActivity {
                 return true;
             }
         });
+        //**********************************************
         recyclerView = findViewById(R.id.diet_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setHasFixedSize(true);
