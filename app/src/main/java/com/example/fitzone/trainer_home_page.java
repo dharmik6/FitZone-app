@@ -14,12 +14,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 public class trainer_home_page extends AppCompatActivity {
     CardView user , diet ,work;
+    TextView logout;
     DrawerLayout drawerLayout ;
     NavigationView navigationView;
     @Override
@@ -31,6 +33,20 @@ public class trainer_home_page extends AppCompatActivity {
 
         diet = findViewById(R.id.cd_diet);
         work = findViewById(R.id.cd_work);
+
+        //this activity is logout
+        logout=findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences pref2 = getSharedPreferences("login2", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref2.edit();
+                editor.putBoolean("flag2", false);
+                editor.apply();
+                redirectActivity(trainer_home_page.this, login_page.class);
+                finish();
+            }
+        });
         user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +101,7 @@ public class trainer_home_page extends AppCompatActivity {
                     SharedPreferences.Editor editor = pref2.edit();
                     editor.putBoolean("flag2", false);
                     editor.apply();
-                    redirectActivity(trainer_home_page.this, home_page.class);
+                    redirectActivity(trainer_home_page.this, login_page.class);
                     finish();
 
                 }
