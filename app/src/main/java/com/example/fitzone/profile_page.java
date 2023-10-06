@@ -83,7 +83,7 @@ public class profile_page extends AppCompatActivity {
 
         // Retrieve and set the user's name, email, and profile image from Firebase Realtime Database
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        // Assuming `userId` is the unique identifier for the user
+        // Assuming userId is the unique identifier for the user
         String userId = currentUser.getUid();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
 

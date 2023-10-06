@@ -1,5 +1,4 @@
 package com.example.fitzone;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -48,7 +47,7 @@ public class DietData extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent homeIntent = new Intent(DietData.this, DietEdit.class);
+                Intent homeIntent = new Intent(DietData.this,DietEdit.class);
                 startActivity(homeIntent);
             }
         });

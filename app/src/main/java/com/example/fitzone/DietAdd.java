@@ -90,7 +90,7 @@ public class DietAdd extends AppCompatActivity {
                                         String imageUrl = uri.toString();
 
                                         // Create a WorkoutItem object
-                                        DietItem dietItem = new DietItem(dietName, dietDescription, imageUrl);
+                                        DietItem dietItem = new DietItem(dietName, imageUrl, dietDescription);
 
                                         // Push the workout data to the database
                                         databaseReference.push().setValue(dietItem);

@@ -4,15 +4,15 @@ public class DietItem {
     private String dietName;
     private String imageUrl;
     private String dietDescription;
-    private String dietFocusArea;
 
-    public DietItem(String dietName, String dietImageResourceId) {
+    public DietItem(String dietName, String imageUrl, String dietDescription) {
         this.dietName = dietName;
-        this.dietDescription = dietImageResourceId;
+        this.imageUrl = imageUrl;
+        this.dietDescription = dietDescription;
     }
 
-    public DietItem(String dietName) {
-        this.dietName=dietName;
+    public String getDietName() {
+        return dietName;
     }
 
     public void setDietName(String dietName) {
@@ -34,19 +34,4 @@ public class DietItem {
     public void setDietDescription(String dietDescription) {
         this.dietDescription = dietDescription;
     }
-
-    public DietItem(String dietName, String dietDescription, String imageUrl) {
-        this.dietName = dietName;
-        this.dietDescription=dietDescription;
-        this.imageUrl=imageUrl;
-    }
-
-    public String getDietName() {
-        return dietName;
-    }
-
-    public String getDietImageResourceId() {
-        return dietDescription;
-    }
-
 }

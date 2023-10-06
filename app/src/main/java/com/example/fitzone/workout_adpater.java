@@ -7,56 +7,53 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-
-
 import java.util.List;
 
-public class DietAdapter extends RecyclerView.Adapter<DietAdapter.ViewHolder> {
+public class workout_adpater extends RecyclerView.Adapter<workout_adpater.ViewHolder> {
 
-    private List<DietItem> dietItems;
+    private List<workout_item> workoutItems;
     private Context context;
 
-
-    public DietAdapter(Context context, List<DietItem> dietItems) {
+    public workout_adpater(Context context, List<workout_item> workoutItems) {
         this.context = context;
-        this.dietItems = dietItems;
+        this.workoutItems = workoutItems;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_diet, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_workout, parent, false);
         return new ViewHolder(view);
     }
 
+    @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        DietItem currentItem = dietItems.get(position);
-        holder.dietNameTextView.setText(currentItem.getDietName());
-
+        workout_item currentItem = workoutItems.get(position);
+        holder.workoutNameTextView.setText(currentItem.getWorkoutName());
 
         // Load user image from Firebase using Glide
-        String imageUrl = currentItem.getImageUrl();
+        String imageUrl = currentItem.getWorkoutImageResourceId();
         Glide.with(context)
                 .load(imageUrl)
-                .into(holder.dietImageView);
+                .into(holder.workoutImageView);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int position = holder.getAdapterPosition();
-                DietItem item = dietItems.get(position);
+                workout_item item = workoutItems.get(position);
                 if (position != RecyclerView.NO_POSITION) {
-                    String dietname = item.getDietName();
-                    String dietdesc = item.getDietDescription();
-                    Intent intent = new Intent(context, DietData.class);
-                    intent.putExtra("dietname", dietname);
-                    intent.putExtra("dietdesc", dietdesc);
-                    intent.putExtra("dietimage", imageUrl);
+                    String workoutname = item.getWorkoutName();
+                    String workoutesc = item.getWorkoutDescription();
+                    String focus = item.getWorkoutFocusArea();
+                    Intent intent = new Intent(context, workout_data.class);
+                    intent.putExtra("workoutname", workoutname);
+                    intent.putExtra("workoutesc", workoutesc);
+                    intent.putExtra("focus", focus);
+                    intent.putExtra("workimage", imageUrl);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 } else {
@@ -69,19 +66,17 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return dietItems.size();
+        return workoutItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView dietNameTextView;
-
-        ImageView dietImageView;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView workoutNameTextView;
+        ImageView workoutImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            dietNameTextView = itemView.findViewById(R.id.dietNameTextView);
-            // Initialize TextView
-            dietImageView = itemView.findViewById(R.id.dietImageView);
+            workoutNameTextView = itemView.findViewById(R.id.workoutNameTextView);
+            workoutImageView = itemView.findViewById(R.id.workoutImageView);
         }
     }
 }

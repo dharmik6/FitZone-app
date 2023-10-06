@@ -30,7 +30,7 @@ public class frag_diet extends Fragment {
 
     //********************
     private RecyclerView recyclerView;
-    private DietAdapter adapter;
+    private diet_adapter adapter;
     private List<DietItem> dietItems = new ArrayList<>();
 
     DatabaseReference databaseReference;
@@ -41,7 +41,7 @@ public class frag_diet extends Fragment {
 
         recyclerView = view.findViewById(R.id.diet_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new DietAdapter(getContext(), dietItems);
+        adapter = new diet_adapter(getContext(), dietItems);
         recyclerView.setAdapter(adapter);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -66,7 +66,8 @@ public class frag_diet extends Fragment {
                     String dietdesc = dataSnapshot.child("dietDescription").getValue(String.class); // Change to "imageUrl"
 
                     if (dietName != null && imageUrl != null) {
-                        DietItem dietItem = new DietItem(dietName, imageUrl);
+                        DietItem dietItem = new DietItem(dietName, imageUrl,dietdesc
+                        );
                         dietItems.add(dietItem);
                     }
                 }
