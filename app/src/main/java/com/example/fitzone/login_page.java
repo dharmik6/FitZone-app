@@ -86,7 +86,7 @@ public class login_page extends AppCompatActivity {
                                      editor.putBoolean("flag" ,true);
                                      editor.apply();
                                         // Sign-in successful, navigate to the next page
-                                        Intent genderPageIntent = new Intent(login_page.this, com.example.fitzone.gender_page.class);
+                                        Intent genderPageIntent = new Intent(login_page.this, com.example.fitzone.home_page.class);
                                         startActivity(genderPageIntent);
                                         finish();
                                     } else {

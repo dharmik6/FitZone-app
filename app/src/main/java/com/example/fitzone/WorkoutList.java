@@ -2,7 +2,9 @@ package com.example.fitzone;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -97,8 +99,17 @@ public class WorkoutList extends AppCompatActivity {
                 else if (id == R.id.diet) {
                     // Redirect to DietList activity
                     redirectActivity(WorkoutList.this, DietList.class);
-                } else {
-                    Toast.makeText(WorkoutList.this, "profile", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.logout)
+                {
+                    SharedPreferences pref = getSharedPreferences("login", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putBoolean("flag", false);
+                    editor.apply();
+
+                    // After logging out, navigate to the LoginActivity
+                    Intent intent = new Intent(WorkoutList.this, trainer_login.class);
+                    startActivity(intent);
+                    finish(); // Close th
                 }
 
                 closeDrawer(drawerLayout);

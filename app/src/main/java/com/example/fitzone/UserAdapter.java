@@ -26,24 +26,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         this.context = context;
         this.userItems = userItems;
     }
-
-
-    public void setAdapterPosition(int adapterPosition) {
-        this.adapterPosition = adapterPosition;
-    }
-
-    public int getAdapterPosition() {
-        return adapterPosition;
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(int position); // Step 1: Define a method for item click
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.onItemClickListener = listener; // Step 2: Set the item click listener
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -65,35 +47,60 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int position = getAdapterPosition();
+                int position = holder.getAdapterPosition(); // Use holder.getAdapterPosition() instead of getAdapterPosition()
+
                 if (position != RecyclerView.NO_POSITION) {
                     UserItem item = userItems.get(position);
+
                     String username = item.getUserName();
                     String email = item.getEmail();
                     String age = item.getAge();
-                    String gender = item.getNumber();
-                    String hiegth = item.getHiegth();
-                    String wiegth = item.getWiegth();
+                    String number = item.getNumber();
+                    String gender = item.getGender();
+                    String height = item.getHiegth(); // Typo corrected from hiegth to height
+                    String weight = item.getWiegth(); // Typo corrected from wirgth to weight
+                    String imageUrl = item.getUserImageResourceId();
 
                     Intent intent = new Intent(context, UserData.class);
-                    intent.putExtra("username", username);// Pass the username as an extra
+                    intent.putExtra("username", username);
                     intent.putExtra("email", email);
                     intent.putExtra("age", age);
+                    intent.putExtra("number", number);
                     intent.putExtra("gender", gender);
-                    intent.putExtra("hiegth", hiegth);
-                    intent.putExtra("wirgth", wiegth);
-                    intent.putExtra("userimage",imageUrl);
+                    intent.putExtra("height", height);
+                    intent.putExtra("weight", weight);
+                    intent.putExtra("userimage", imageUrl);
 
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Add this flag
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 } else {
                     // Handle the case where the position is invalid or the view holder is detached.
                     // You can log an error or display a message to the user.
                 }
-
             }
         });
     }
+
+
+
+    public void setAdapterPosition(int adapterPosition) {
+        this.adapterPosition = adapterPosition;
+    }
+
+    public int getAdapterPosition() {
+        return adapterPosition;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position); // Step 1: Define a method for item click
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener; // Step 2: Set the item click listener
+    }
+
+
+
 
     @Override
     public int getItemCount() {

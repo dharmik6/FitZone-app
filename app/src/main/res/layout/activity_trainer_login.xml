@@ -126,19 +126,6 @@
                 android:transformPivotY="5dp"
                 tools:ignore="DuplicateSpeakableTextCheck" />
 
-            <TextView
-                android:id="@+id/btn_forgetpass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/robotoslab_regular"
-                android:minHeight="48dp"
-                android:onClick="onClickForget_Password"
-                android:text="@string/forget_password"
-                android:textAlignment="center"
-                android:textColor="@color/text_color"
-                android:textSize="17sp" />
-
 
         </LinearLayout>
 

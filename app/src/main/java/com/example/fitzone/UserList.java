@@ -1,7 +1,9 @@
 package com.example.fitzone;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +17,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fitzone.UserItem;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -69,13 +70,21 @@ public class UserList extends AppCompatActivity {
 
                 if (id == R.id.user) {
                     redirectActivity(UserList.this, UserList.class);
-                }
-                else if (id == R.id.workout) {
+                }  else if (id == R.id.workout) {
                     redirectActivity(UserList.this, WorkoutList.class);
                 } else if (id == R.id.diet) {
                     redirectActivity(UserList.this, DietList.class);
-                } else {
-                    Toast.makeText(UserList.this, "profile", Toast.LENGTH_SHORT).show();
+                }  else if (id == R.id.logout)
+                {
+                    SharedPreferences pref = getSharedPreferences("login", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putBoolean("flag", false);
+                    editor.apply();
+
+                    // After logging out, navigate to the LoginActivity
+                    Intent intent = new Intent(UserList.this, login_page.class);
+                    startActivity(intent);
+                    finish(); // Close th
                 }
 
                 closeDrawer(drawerLayout);
@@ -102,15 +111,32 @@ public class UserList extends AppCompatActivity {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String userName = dataSnapshot.child("name").getValue(String.class);
+                    String email = dataSnapshot.child("email").getValue(String.class);
+                    Long ageLong = dataSnapshot.child("age").getValue(Long.class);
+                    Long heightLong = dataSnapshot.child("height").getValue(Long.class);
+                    Long weightLong = dataSnapshot.child("weight").getValue(Long.class);
+                    String gender = dataSnapshot.child("gender").getValue(String.class);
+                    String phone = dataSnapshot.child("Number").getValue(String.class);
                     String uImage = dataSnapshot.child("img").getValue(String.class);
+
+                    // Convert Long values to String
+                    String age = String.valueOf(ageLong);
+                    String height = String.valueOf(heightLong);
+                    String weight = String.valueOf(weightLong);
 
                     if (userName != null) {
                         UserItem userItem = new UserItem();
                         userItem.setUserName(userName);
+                        userItem.setAge(age);
+                        userItem.setGender(gender);
+                        userItem.setEmail(email);
+                        userItem.setNumber(phone);
+                        userItem.setHiegth(height);
+                        userItem.setWiegth(weight);
                         userItem.setUserImageResourceId(uImage);
-//                        userItem.setUserImageResourceId(userImageResourceId.intValue());
 
                         userItems.add(userItem);
+
                     }
                 }
                 adapter.notifyDataSetChanged(); // Notify the adapter that the data has changed

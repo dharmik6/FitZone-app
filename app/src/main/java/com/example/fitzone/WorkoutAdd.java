@@ -28,12 +28,13 @@ import com.google.firebase.storage.UploadTask;
 public class WorkoutAdd extends AppCompatActivity {
 
     EditText work_name , focuse_work , description ;
-    Button add_work ,add_work_image;
+    Button add_work , add_work_image;
     ImageView work_image ;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri selectedImageUri;
     private StorageReference storageReference;
     DatabaseReference databaseReference;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,10 @@ public class WorkoutAdd extends AppCompatActivity {
         databaseReference = database.getReference("workouts");
         storageReference = FirebaseStorage.getInstance().getReference().child("workout_images");
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Adding Workout...");
+        progressDialog.setCancelable(false);
+
         add_work_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,62 +63,65 @@ public class WorkoutAdd extends AppCompatActivity {
                 startActivityForResult(iGallery, PICK_IMAGE_REQUEST);
             }
         });
-//***********************
+
         add_work.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create a ProgressDialog
-                ProgressDialog pd = new ProgressDialog(WorkoutAdd.this);
-                pd.setMessage("Loading user data");
-                pd.setCancelable(false);
-
                 // Show the ProgressDialog
-                pd.show();
+                progressDialog.show();
 
                 // Get the values from EditText fields
                 String workoutName = work_name.getText().toString();
                 String focusArea = focuse_work.getText().toString();
                 String workoutDescription = description.getText().toString();
 
-                // Check if all fields are filled
                 if (!workoutName.isEmpty() && !focusArea.isEmpty() && !workoutDescription.isEmpty() && selectedImageUri != null) {
-                    // Create a reference for the image file in Firebase Storage
                     StorageReference imageRef = storageReference.child(selectedImageUri.getLastPathSegment());
-
-                    // Upload the image to Firebase Storage
                     UploadTask uploadTask = imageRef.putFile(selectedImageUri);
 
-                    // Listen for the completion of the upload task
                     uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                             if (task.isSuccessful()) {
-                                // Get the download URL for the uploaded image
                                 imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        // Use uri.toString() to get the image URL
                                         String imageUrl = uri.toString();
+                                        WorkoutItem workoutItem = new WorkoutItem(workoutName, focusArea, workoutDescription, imageUrl);
 
-                                        // Create a WorkoutItem object
-                                       WorkoutItem workoutItem = new WorkoutItem(workoutName, focusArea, workoutDescription, imageUrl);
-
-                                        // Push the workout data to the database
-                                        databaseReference.push().setValue(workoutItem);
-                                        startActivity(new Intent(WorkoutAdd.this, WorkoutList.class));
-                                        Toast.makeText(WorkoutAdd.this, "Workout added", Toast.LENGTH_SHORT).show();
-                                        pd.dismiss();
+                                        databaseReference.push().setValue(workoutItem).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    // Data added successfully
+                                                    Toast.makeText(WorkoutAdd.this, "Workout added", Toast.LENGTH_SHORT).show();
+                                                    // Dismiss the ProgressDialog
+                                                    progressDialog.dismiss();
+                                                    // Navigate to WorkoutList activity
+                                                    startActivity(new Intent(WorkoutAdd.this, WorkoutList.class));
+                                                } else {
+                                                    // Handle failure
+                                                    Toast.makeText(WorkoutAdd.this, "Failed to add workout", Toast.LENGTH_SHORT).show();
+                                                    // Dismiss the ProgressDialog
+                                                    progressDialog.dismiss();
+                                                }
+                                            }
+                                        });
                                     }
                                 });
                             } else {
-                                // Handle the upload failure
+                                // Handle upload failure
                                 Toast.makeText(WorkoutAdd.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+                                // Dismiss the ProgressDialog
+                                progressDialog.dismiss();
                             }
                         }
                     });
                 } else {
-                    pd.dismiss();
+                    // Fields are empty
                     Toast.makeText(WorkoutAdd.this, "Please fill in all fields and select an image", Toast.LENGTH_SHORT).show();
+                    // Dismiss the ProgressDialog
+                    progressDialog.dismiss();
                 }
             }
         });
@@ -135,7 +143,6 @@ public class WorkoutAdd extends AppCompatActivity {
             selectedImageUri = data.getData();
 
             try {
-                // Load the selected image into the ImageView
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
                 work_image.setImageBitmap(bitmap);
             } catch (Exception e) {

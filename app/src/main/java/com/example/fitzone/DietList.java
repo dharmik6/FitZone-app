@@ -2,7 +2,9 @@ package com.example.fitzone;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,7 +53,7 @@ public class DietList extends AppCompatActivity {
         add_diet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent idietadd = new Intent(DietList.this,DietAdd.class);
+                Intent idietadd = new Intent(DietList.this, DietAdd.class);
                 startActivity(idietadd);
             }
         });
@@ -83,8 +85,17 @@ public class DietList extends AppCompatActivity {
                     redirectActivity(DietList.this, WorkoutList.class);
                 } else if (id == R.id.diet) {
                     redirectActivity(DietList.this, DietList.class);
-                } else {
-                    Toast.makeText(DietList.this, "profile", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.logout)
+                {
+                    SharedPreferences pref = getSharedPreferences("login", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putBoolean("flag", false);
+                    editor.apply();
+
+                    // After logging out, navigate to the LoginActivity
+                    Intent intent = new Intent(DietList.this, trainer_login.class);
+                    startActivity(intent);
+                    finish(); // Close th
                 }
 
                 closeDrawer(drawerLayout);
@@ -107,6 +118,7 @@ public class DietList extends AppCompatActivity {
     }
 
     private void setDatabaseListener() {
+        progressDialog.show();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -125,11 +137,13 @@ public class DietList extends AppCompatActivity {
                         dietItems.add(dietItem);
                     }
                 }
-                adapter.notifyDataSetChanged(); // Notify the adapter that the data has changed
+                adapter.notifyDataSetChanged();
+                progressDialog.dismiss();// Notify the adapter that the data has changed
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                progressDialog.dismiss();
                 // Handle database error
             }
         });

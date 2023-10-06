@@ -41,16 +41,16 @@ public class DietData extends AppCompatActivity {
         dietImage = findViewById(R.id.diet_image);
         dietName = findViewById(R.id.diet_name);
         dietDesc = findViewById(R.id.diet_description);
-        update = findViewById(R.id.btn_Update);
+
         delete = findViewById(R.id.btn_Delete);
 
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent homeIntent = new Intent(DietData.this,DietEdit.class);
-                startActivity(homeIntent);
-            }
-        });
+//        update.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent homeIntent = new Intent(DietData.this,DietEdit.class);
+//                startActivity(homeIntent);
+//            }
+//        });
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override

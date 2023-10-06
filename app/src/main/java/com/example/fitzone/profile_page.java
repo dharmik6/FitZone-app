@@ -62,7 +62,7 @@ public class profile_page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent iupdt = new Intent(profile_page.this , gender_page.class);
+                Intent iupdt = new Intent(profile_page.this , age_page.class);
                 startActivity(iupdt);
             }
         });
